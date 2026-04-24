@@ -1,6 +1,8 @@
+// ================= DOM =================
 const form = document.getElementById("incidentForm");
 const incidentList = document.getElementById("incidentList");
 
+// ================= SUBMIT =================
 form.addEventListener("submit", function (e) {
     e.preventDefault();
 
@@ -10,47 +12,43 @@ form.addEventListener("submit", function (e) {
     const comments = document.getElementById("comments").value.trim();
     const reporter = document.getElementById("reporter").value.trim();
 
-    document.getElementById("incidentDateError").textContent = "";
-    document.getElementById("incidentTagError").textContent = "";
-    document.getElementById("severityError").textContent = "";
-    document.getElementById("commentsError").textContent = "";
-    document.getElementById("reporterError").textContent = "";
+    // очищення помилок
+    clearErrors();
 
     let hasError = false;
 
-    if (incidentDate === "") {
-        document.getElementById("incidentDateError").textContent = "Оберіть дату інциденту";
+    if (!incidentDate) {
+        showError("incidentDate", "incidentDateError", "Оберіть дату");
         hasError = true;
     }
 
-    if (incidentTag === "") {
-        document.getElementById("incidentTagError").textContent = "Введіть тег інциденту";
+    if (!incidentTag) {
+        showError("incidentTag", "incidentTagError", "Введіть тег");
         hasError = true;
     }
 
-    if (severity === "") {
-        document.getElementById("severityError").textContent = "Оберіть рівень серйозності";
+    if (!severity) {
+        showError("severity", "severityError", "Оберіть рівень");
         hasError = true;
     }
 
-    if (comments === "") {
-        document.getElementById("commentsError").textContent = "Введіть коментар";
+    if (!comments) {
+        showError("comments", "commentsError", "Введіть коментар");
         hasError = true;
     }
 
-    if (reporter === "") {
-        document.getElementById("reporterError").textContent = "Введіть ім'я того, хто повідомив";
+    if (!reporter) {
+        showError("reporter", "reporterError", "Введіть ім’я");
         hasError = true;
     }
 
-    if (hasError) {
-        return;
-    }
+    if (hasError) return;
 
-    const incidentItem = document.createElement("div");
-    incidentItem.className = "incident-item";
+    // створення інциденту
+    const item = document.createElement("div");
+    item.className = "incident-item";
 
-    incidentItem.innerHTML = `
+    item.innerHTML = `
         <strong>Дата:</strong> ${incidentDate}<br>
         <strong>Тег:</strong> ${incidentTag}<br>
         <strong>Серйозність:</strong> ${severity}<br>
@@ -58,11 +56,23 @@ form.addEventListener("submit", function (e) {
         <strong>Хто повідомив:</strong> ${reporter}
     `;
 
-    if (incidentList.innerHTML.includes("Поки що інцидентів немає")) {
+    // прибрати текст "немає"
+    if (incidentList.innerHTML.includes("немає")) {
         incidentList.innerHTML = "";
     }
 
-    incidentList.appendChild(incidentItem);
+    incidentList.appendChild(item);
 
     form.reset();
 });
+
+// ================= ERRORS =================
+function showError(inputId, errorId, message) {
+    document.getElementById(inputId).classList.add("invalid");
+    document.getElementById(errorId).textContent = message;
+}
+
+function clearErrors() {
+    document.querySelectorAll(".invalid").forEach(el => el.classList.remove("invalid"));
+    document.querySelectorAll(".error-text").forEach(el => el.textContent = "");
+}
