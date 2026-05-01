@@ -2,68 +2,66 @@
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Трекер інцидентів кібербезпеки</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="app.js" defer></script>
+    <title>Трекер інцидентів</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Трекер інцидентів кібербезпеки</h1>
-        <p>Система для реєстрації та перегляду інцидентів кібербезпеки</p>
 
-        <div class="layout">
-            <section class="form-section">
-                <h2>Додати інцидент</h2>
+<h1>Трекер інцидентів кібербезпеки</h1>
+<p class="subtitle">Система для реєстрації та перегляду інцидентів</p>
 
-                <form id="incidentForm">
-                    <div class="field">
-                        <label for="incidentDate">Дата інциденту</label>
-                        <input type="date" id="incidentDate" name="incidentDate">
-                        <p class="error-text" id="incidentDateError"></p>
-                    </div>
+<div class="main">
 
-                    <div class="field">
-                        <label for="incidentTag">Тег інциденту</label>
-                        <input type="text" id="incidentTag" name="incidentTag" placeholder="Наприклад: phishing, malware, ddos">
-                        <p class="error-text" id="incidentTagError"></p>
-                    </div>
+    <div class="block">
+        <h2>Додати інцидент</h2>
 
-                    <div class="field">
-                        <label for="severity">Рівень серйозності</label>
-                        <select id="severity" name="severity">
-                            <option value="">Оберіть рівень</option>
-                            <option value="Низький">Низький</option>
-                            <option value="Середній">Середній</option>
-                            <option value="Високий">Високий</option>
-                            <option value="Критичний">Критичний</option>
-                        </select>
-                        <p class="error-text" id="severityError"></p>
-                    </div>
+        <label>Дата</label>
+        <input type="date" id="dateInput">
 
-                    <div class="field">
-                        <label for="comments">Коментар</label>
-                        <textarea id="comments" name="comments" rows="4" placeholder="Опишіть інцидент"></textarea>
-                        <p class="error-text" id="commentsError"></p>
-                    </div>
+        <label>Тип</label>
+        <input type="text" id="typeInput">
 
-                    <div class="field">
-                        <label for="reporter">Хто повідомив</label>
-                        <input type="text" id="reporter" name="reporter" placeholder="Введіть ПІБ або ім'я">
-                        <p class="error-text" id="reporterError"></p>
-                    </div>
+        <label>Рівень</label>
+        <select id="levelInput">
+            <option value="">Оберіть</option>
+            <option>Низький</option>
+            <option>Середній</option>
+            <option>Високий</option>
+            <option>Критичний</option>
+        </select>
 
-                    <button type="submit">Додати інцидент</button>
-                </form>
-            </section>
+        <label>Коментар</label>
+        <textarea id="commentInput"></textarea>
 
-            <section class="list-section">
-                <h2>Список інцидентів</h2>
-                <div id="incidentList">
-                    <p>Поки що інцидентів немає.</p>
-                </div>
-            </section>
-        </div>
+        <label>Хто повідомив</label>
+        <input type="text" id="personInput">
+
+        <button id="mainButton" onclick="addIncident()">Додати</button>
     </div>
+
+    <div class="block">
+        <h2>Список інцидентів</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>№</th>
+                    <th onclick="sortBy('date')">Дата ⬍</th>
+                    <th onclick="sortBy('type')">Тип ⬍</th>
+                    <th onclick="sortBy('level')">Рівень ⬍</th>
+                    <th onclick="sortBy('comment')">Коментар ⬍</th>
+                    <th onclick="sortBy('person')">Хто повідомив ⬍</th>
+                    <th>Дія</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+        </table>
+
+        <p id="emptyText">Поки що інцидентів немає</p>
+    </div>
+
+</div>
+
+<script src="app.js"></script>
 </body>
 </html>

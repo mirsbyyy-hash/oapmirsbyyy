@@ -1,0 +1,83 @@
+body {
+    margin: 0;
+    font-family: Arial;
+    background: #f4f0fa;
+}
+
+h1 {
+    text-align: center;
+    color: #8e44ad;
+}
+
+.subtitle {
+    text-align: center;
+}
+
+.main {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+}
+
+.block {
+    background: #f7ecfb;
+    padding: 20px;
+    border-radius: 10px;
+    width: 50%;
+}
+
+input, select, textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+button {
+    background: #b565d9;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th {
+    background: #cdb4db;
+    cursor: pointer;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+td {
+    background: #f8f4fc;
+}
+
+tr:nth-child(even) td {
+    background: #f1e9fa;
+}
+
+.edit-btn {
+    background: #bde0fe;
+    border: none;
+    padding: 5px;
+    border-radius: 6px;
+}
+
+.delete-btn {
+    background: #ffb3c6;
+    border: none;
+    padding: 5px;
+    border-radius: 6px;
+}
